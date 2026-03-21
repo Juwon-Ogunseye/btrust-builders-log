@@ -47,13 +47,13 @@ With Bitcoin, there is no need for a central authority, and we are free from mas
 
 #  Risks of Using `bitcoind` and `lightningd`
 
-### 🚨 Financial Risk
+###  Financial Risk
 
 One can easily lose funds interacting directly with Bitcoin via bitcoind. One wrong address or fee calculation and your money is gone for good. With other higher-level libraries, some of them add checks for common mistakes like incomplete addresses or high fees, which bitcoind does not add.
 
 ###  Storage & Accessibility
 
-Mainnet is about **700GB**, which makes it too large for those with limited space on their PC and also those with poor internet accessibility. This will also become an issue.
+Mainnet is about **700GB**, which makes it too large for those with limited space on their PC and also those with poor internet accessibility especially in third world countries. This will also become an issue.
 
 ###  Mobile Limitations
 
@@ -165,4 +165,107 @@ That is RPC.
     
 
 >  RPC allows you to control your Bitcoin node remotely from your local machine.
+
+
+### How do the five major types of Bitcoin nodes differ?
+
+**Mainnet:**  
+This is the main blockchain node with real Bitcoin data. They are not for testing, and they are used for real Bitcoin transactions. They are very large at the moment it is over 500GB of data. It runs a full node using proof-of-work algorithms. If you are running a full node, you need to have a significant amount of space, as it is estimated that over 50GB of data are generated annually (could be more now).
+
+---
+
+**Pruned mainnet:**  
+What makes this different is that it discards older Bitcoin data that are no longer needed for validation and keeps only the recent required data, reducing storage to as low as around 550MB or more depending on configuration. A pruned node is good for those who don’t have large storage. One of the major disadvantages I read is that it doesn’t support routing Lightning Network payments, but it can still be used as a wallet.
+
+---
+
+**Testnet:**  
+These are nodes used for testing. If you are just getting into Bitcoin, it is always better to run your tests and all other learning processes on testnet, as you won’t be using real funds. It is like a dev environment developers use when testing an app. Unlike mainnet and pruned nodes, everything done here is not real or live transactions.
+
+It also has its downside everything here is chaotic sometimes. Blocks are mined irregularly, sometimes nothing happens. People can spam or abuse the system on testnet, and this is where signet comes in.
+
+---
+
+**Signet:**  
+They are a more controlled version of testnet and are more reliable. It is designed to have more predictable block production, usually around every 10 minutes. Unlike testnet where anyone can mine freely, signet has controlled block creation, which makes it more stable for testing. But again, they are not real like mainnet.
+
+---
+
+**Pruned-signet:**  
+This is just signet but pruned, meaning it keeps only recent data and reduces storage size similar to pruned mainnet.
+
+---
+
+### What are the benefits of using a VPS (Virtual Private Server) for running a Bitcoin node versus a local machine?
+
+One, it is easier to set up using StackScript, and it can be cheaper especially if you need to run a full node. Also, if you are in a country like Nigeria where power supply is unstable, running your node on a VPS is a better option since it stays online 24/7 without interruption.
+
+### How does running a full node contribute to the security and decentralization of the Bitcoin network?
+
+One, it makes the Bitcoin network stronger. The more full nodes that exist, the more distributed and reliable the network becomes.
+
+Two, you don’t need to trust a third party you can validate your own transactions by yourself.
+
+You also make the network more resistant to attacks because the network is spread across many independent nodes, making it harder to compromise.
+
+---
+
+### How does a pruned Bitcoin node differ from an unpruned node, and when should you use each?
+
+A pruned node discards older blockchain data and keeps only the recent required data, making it much smaller than an unpruned node. For example, mainnet can be over 700GB, while pruned nodes can be configured to use a few GB.
+
+So if a developer in Nigeria using Windows, VS Code, and several applications wants to run a full unpruned node, they will need a bigger machine with more storage.
+
+Also, when you use a pruned node, you won’t be able to access or query older transactions because they have been removed, and you also cannot help new nodes sync by serving them full historical data.
+
+---
+
+### What are the differences between Mainnet, Testnet, and Regtest, and in what scenarios would each be used?
+
+Mainnet runs the full node and contains real transactions and real Bitcoin data.
+
+Testnet has test transactions, unstable blocks, and runs on a public network that anyone can join and use for testing.
+
+Regtest runs on a private environment where you control everything. You can create blocks manually and test quickly, and although it is usually just your environment, you can simulate multiple nodes if needed.
+
+Mainnet is used for real production transactions, like creating wallets and sending actual Bitcoin.
+
+Testnet is used to test applications before deploying to mainnet. It is like a public testing environment.
+
+Regtest is used for local development and fast testing in a controlled setup.
+
+---
+
+### What security priorities should be considered when setting up a Bitcoin node on a VPS?
+
+- Firewall configuration: implement a firewall to control incoming and outgoing traffic
+    
+- Set IP/port configuration: avoid exposing unnecessary ports like 0.0.0.0
+    
+- Close all unused ports
+    
+- Set up DDoS protection to prevent flooding attacks
+    
+- Enable two-factor authentication to make sure only you have access
+    
+
+---
+
+### What are the advantages of using a StackScript to set up a Bitcoin Core VPS?
+
+StackScript makes the setup process easier because it automates most of the installation and configuration steps. You don’t have to manually install everything, which reduces stress and saves time.
+
+It also reduces the chances of making mistakes during setup since everything is already pre-configured, and you can get your node running faster compared to doing everything manually.
+
+---
+
+### Why might a developer choose to run a local instance of the Bitcoin blockchain rather than using a remote node?
+
+One reason is trust you don’t have to depend on a third-party node. Everything is running on your own machine, so you are sure the data is accurate.
+
+Another reason is privacy. When using a remote node, your requests can be monitored, but with a local node, everything stays with you.
+
+Also, for development, running locally gives you more control. You can test faster, especially with regtest, and you are not dependent on network delays or external services.
+
+
 
