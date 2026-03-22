@@ -10,7 +10,7 @@
 - Windows Setup
 - Linux Setup
 - Key Differences
-- Quick Reference Commands
+
 
 ---
 
