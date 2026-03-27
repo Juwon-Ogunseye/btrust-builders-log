@@ -3,7 +3,7 @@
 
 first you create a wallet, for me i am using regtest so i will be creating the wallet with `-regtest`.
 
-first what is a bitcoin wallet — this is a digital account where your bitcoin is stored. it is like your traditional bank account where you are provided an account number to receive money into and you are also asked to create a security pin, just that in bitcoin your wallet comes with both private and public key which is like your Gtbank account coming with both account number and a password that is only known to you.
+first what is a bitcoin wallet , this is a digital account where your private key is stored. because technically you dont store or send bitcoin you are actually exchanging keys it is like your traditional bank account where you are provided an account number to receive money into and you are also asked to create a security pin, just that in bitcoin your wallet comes with both private and public key which is like your Gtbank account coming with both account number and a password that is only known to you.
 
 first step in creating a bitcoin address is to first create a bitcoin wallet and you can do that via the command line using
 
@@ -35,7 +35,7 @@ so for example you have this as your public key
 
 k = 03efdee34c
 
-you can derive a legacy here
+you can derive a legacy address here
 
 pkh(k)
 
@@ -54,7 +54,7 @@ so by running `tree ~/.bitcoin/regtest` you should see all the files and node la
 - index (a whole lot of files are embedded in this)
     
 
-**chainstate:** this contains the current state of the blockchain. who currently owns bitcoin this is where utxo is. so it is the most important file and also contains subfiles
+**chainstate:** this contains the current state of the blockchain. it tracks which keys can spend output. so it is the most important file and also contains subfiles
 
 - current
     
@@ -93,7 +93,7 @@ this will show you if your node is synced, the number of blocks, and the chain y
 you can also check
 
 ```
-bitcoin-cli getnetworkinfo
+bitcoin-cli -regtest getnetworkinfo
 ```
 
 to see how your node is connected to other peers.
@@ -129,21 +129,21 @@ because once you send bitcoin there is no reverse button and no customer care to
 
 ### What are the benefits of using command-line variables when working with Bitcoin Core?
 
-so instead of writing the full command every single time you can define variables and reuse them.
+so instead of writing the full bitcoin address every time you can define variables and reuse them.
 
 for example you can store
 
 ```
-cli="bitcoin-cli -regtest"
+This_Address=$(bitcoin-cli -regtest getnewaddress)
 ```
 
-so instead of writing the long command again and again you just do
+so if you want to mine some blocks to get 50 bitcoin on regtest you can just called the variable $this_address instead of writing the long bitcoins address again and again you just do
 
 ```
-$cli getblockchaininfo
+bitcoin-cli -regtest generatetoaddress 101 $This_Address
 ```
 
-this makes your work faster and reduces mistakes because sometimes you might forget to add `-regtest` and end up running command on the wrong network.
+this makes your work faster and reduces mistakes .
 
 it also makes your script cleaner especially when you are doing multiple commands.
 
